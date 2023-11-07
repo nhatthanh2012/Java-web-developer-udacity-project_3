@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,7 +57,10 @@ public class ScheduleService {
     }
 
     public List<Schedule> findAllByCustomer(Long customerId) {
-        Customer customer = customerRepository.getOne(customerId);
-        return scheduleRepository.getAllByCustomersContains(customer);
+        Customer customer = customerRepository.findById(customerId).get();
+        if(customer != null) {
+            return scheduleRepository.getAllByPetsIn(customer.getPets());
+        }
+        return new ArrayList<>();
     }
 }

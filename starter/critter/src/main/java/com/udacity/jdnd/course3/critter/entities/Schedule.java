@@ -34,14 +34,6 @@ public class Schedule {
     )
     private List<Pet> pets;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-        name = "schedule_customer",
-        joinColumns = {@JoinColumn(name = "schedule_id")},
-        inverseJoinColumns = {@JoinColumn(name = "customer_id")}
-    )
-    private List<Customer> customers;
-
     private LocalDate date;
 
     @ElementCollection
@@ -70,14 +62,6 @@ public class Schedule {
 
     public void setPets(List<Pet> pets) {
         this.pets = pets;
-    }
-
-    public List<Customer> getCustomers() {
-        return customers;
-    }
-
-    public void setCustomers(List<Customer> customers) {
-        this.customers = customers;
     }
 
     public LocalDate getDate() {
